@@ -196,6 +196,7 @@ fun VibrateToggle(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
         label = { Text("震动开关") },
         toggleControl = { Switch(checked = checked) },
         onCheckedChange = onCheckedChange,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        appIcon = {Icon(painter = painterResource(R.drawable.ic_chip_vibration),contentDescription = null)}
     )
 }
