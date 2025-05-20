@@ -1,5 +1,5 @@
 # woodfish-wear-os 电子木鱼
-一个用 jetpack compose 开发的wearos手表应用
+一个用 jetpack compose 开发的电子木鱼wearos手表应用
 ## 应用截图
 
 | 设备类型 | 截图A | 截图B |
