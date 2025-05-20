@@ -190,21 +190,6 @@ fun vibrate(context: Context) {
 }
 
 @Composable
-fun BottomHint() {
-    CurvedLayout(
-        modifier = Modifier.fillMaxSize(),
-        anchor = 90f,
-        radialAlignment = CurvedAlignment.Radial.Outer,
-        anchorType = AnchorType.Center
-    ) {
-        curvedText(
-            text = "↑ 上滑打开设置",
-            angularDirection = CurvedDirection.Angular.Reversed,
-        )
-    }
-}
-
-@Composable
 fun VibrateToggle(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
 
     ToggleChip(checked = checked,
