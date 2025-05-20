@@ -30,6 +30,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _countNumber = mutableIntStateOf(0)
     val countNumber: State<Int> = _countNumber
 
+    private val _isVibrateOpen = mutableStateOf(true)
+    val isVibrateOpen: State<Boolean> = _isVibrateOpen
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             launch { _newText.value = dataStoreManager.readTextFlow.first() }
@@ -65,6 +68,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _newText.value = newText
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreManager.saveText(newText)
+        }
+    }
+
+    fun updateIsVibrateOpen(boolean: Boolean) {
+        _isVibrateOpen.value = boolean
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreManager.saveVibrate(boolean)
         }
     }
 

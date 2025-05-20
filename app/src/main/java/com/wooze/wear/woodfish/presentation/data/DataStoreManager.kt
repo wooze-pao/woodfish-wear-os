@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -17,6 +18,7 @@ val COUNT = intPreferencesKey("count")
 val TEXT = stringPreferencesKey("text")
 val COLOR = intPreferencesKey("color")
 val SOUND = stringPreferencesKey("sound")
+val VIBRATE = booleanPreferencesKey("vibrate")
 
 class DataStoreManager(private val context: Context) {
 
@@ -47,10 +49,15 @@ class DataStoreManager(private val context: Context) {
         writeData(SOUND, data)
     }
 
+    suspend fun saveVibrate(boolean: Boolean) {
+        writeData(VIBRATE,boolean)
+    }
+
     val readTextFlow: Flow<String> = readData<String>(TEXT, "功德")
     val readSoundFlow: Flow<String> = readData<String>(SOUND, "清脆")
     val readColorFlow: Flow<Int> = readData<Int>(COLOR, Color.White.toArgb())
     val readCountFlow: Flow<Int> = readData<Int>(COUNT, 0)
+    val readIsVibrateOpenFlow : Flow<Boolean> = readData<Boolean>(VIBRATE,true)
 
 
 }
