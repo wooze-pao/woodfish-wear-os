@@ -21,6 +21,7 @@ fun MainPage(
     val newText by viewModel.newText
     val selectedColor by viewModel.selectedColor
     val selectedSound by viewModel.selectedSoundEffect
+    val isVibrateOpen by viewModel.isVibrateOpen
 
     ScalingLazyColumn(state = listState) {
         item { MuyuItemPage(viewModel, newText, selectedColor, selectedSound,isVibrateOpen) }
