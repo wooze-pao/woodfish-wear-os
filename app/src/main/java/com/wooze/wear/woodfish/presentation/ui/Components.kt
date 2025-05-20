@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -46,7 +47,11 @@ import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.CompactChip
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Switch
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.ToggleButton
+import androidx.wear.compose.material.ToggleChip
+import androidx.wear.compose.material.ToggleChipDefaults
 import androidx.wear.compose.material.curvedText
 import com.wooze.wear.woodfish.R
 
@@ -199,3 +204,13 @@ fun BottomHint() {
     }
 }
 
+@Composable
+fun VibrateToggle(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+
+    ToggleChip(checked = checked,
+        label = { Text("震动开关") },
+        toggleControl = { Switch(checked = checked) },
+        onCheckedChange = onCheckedChange,
+        modifier = Modifier.fillMaxWidth()
+    )
+}

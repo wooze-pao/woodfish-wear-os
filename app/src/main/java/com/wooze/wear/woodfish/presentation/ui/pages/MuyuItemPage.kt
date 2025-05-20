@@ -38,7 +38,8 @@ fun MuyuItemPage(
     viewModel: MainViewModel,
     text: String,
     color: Color,
-    sound: String
+    sound: String,
+    isVibrateOpen : Boolean
 ) {
     val countNumber by viewModel.countNumber
     val context = LocalContext.current

@@ -11,6 +11,7 @@ import com.wooze.wear.woodfish.presentation.ui.ColorChange
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 import com.wooze.wear.woodfish.presentation.ui.SoundChange
 import com.wooze.wear.woodfish.presentation.ui.TextChange
+import com.wooze.wear.woodfish.presentation.ui.VibrateToggle
 
 @Composable
 fun MainPage(

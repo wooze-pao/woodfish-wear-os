@@ -39,6 +39,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             launch { _selectedSoundEffect.value = dataStoreManager.readSoundFlow.first() }
             launch { _countNumber.intValue = dataStoreManager.readCountFlow.first() }
             launch { _selectedColor.value = Color(dataStoreManager.readColorFlow.first()) }
+            launch { _isVibrateOpen.value = dataStoreManager.readIsVibrateOpenFlow.first() }
         }
     }
 
