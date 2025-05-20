@@ -30,6 +30,7 @@ fun MainPage(
                 onColorChange = { newColor -> viewModel.updateColor(newColor) })
         }
         item { TextChange(navController, newText) }
+        item { VibrateToggle(isVibrateOpen, onCheckedChange = {boolean -> viewModel.updateIsVibrateOpen(boolean)}) }
         item {
             SoundChange(
                 selectedSound,
