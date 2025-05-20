@@ -23,7 +23,7 @@ fun MainPage(
     val selectedSound by viewModel.selectedSoundEffect
 
     ScalingLazyColumn(state = listState) {
-        item { MuyuItemPage(viewModel, newText, selectedColor, selectedSound) }
+        item { MuyuItemPage(viewModel, newText, selectedColor, selectedSound,isVibrateOpen) }
         item {
             ColorChange(
                 selectedColor,
