@@ -93,7 +93,9 @@ fun MuyuItemPage(
                 ) {
                     toggled = true
                     coroutineScope.launch {
-                        launch { vibrate(context) }
+                        if (isVibrateOpen) {
+                            launch { vibrate(context) }
+                        }
                         launch { soundPool.play(soundId, 1f, 1f, 0, 0, 1.0f) }
                         viewModel.addCountNumber()
                         delay(timeMillis = animationTime.toLong())
