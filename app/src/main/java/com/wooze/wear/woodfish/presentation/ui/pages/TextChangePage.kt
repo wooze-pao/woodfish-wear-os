@@ -38,7 +38,7 @@ fun TextChangePage(
     var hasOpenedIme by remember { mutableStateOf(false) }
     val imeVisible = WindowInsets.isImeVisible
     LaunchedEffect(Unit) {
-        delay(100)
+        delay(150)
         focusRequester.requestFocus()
         keyboardController?.show()
         hasStarted = true
@@ -50,8 +50,7 @@ fun TextChangePage(
         } else if (hasOpenedIme && hasStarted) {
             hasOpenedIme = false
             hasStarted = false
-            focusRequester.freeFocus()
-            navController.navigate("mainPage")
+            navController.popBackStack()
         }
     }
 
@@ -70,7 +69,7 @@ fun TextChangePage(
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = {
                 keyboardController?.hide()
-                navController.navigate("mainPage")
+                navController.popBackStack()
             },)
         )
     }

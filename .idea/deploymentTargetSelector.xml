@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-05-18T05:37:26.798400Z">
+        <DropdownSelection timestamp="2025-05-20T01:43:18.651990700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RFAX31SWYWE" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\wooze\.android\avd\Wear_OS_Large_Round.avd" />
             </handle>
           </Target>
         </DropdownSelection>
