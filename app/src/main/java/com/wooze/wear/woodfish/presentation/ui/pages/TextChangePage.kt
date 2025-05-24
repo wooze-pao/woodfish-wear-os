@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.foundation.text.BasicSecureTextField
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -19,10 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextRange
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 
 
@@ -37,10 +41,17 @@ fun TextChangePage(
     var hasStarted by remember { mutableStateOf(false) }
     var hasOpenedIme by remember { mutableStateOf(false) }
     val imeVisible = WindowInsets.isImeVisible
+    var newValue by remember {
+        mutableStateOf(
+            TextFieldValue(
+                viewModel.newText.value
+            )
+        )
+    }
     LaunchedEffect(Unit) {
         delay(150)
         focusRequester.requestFocus()
-        keyboardController?.show()
+        println("TextChangePage ${newValue}")
         hasStarted = true
     }
 
@@ -62,16 +73,24 @@ fun TextChangePage(
     ) {
 
         BasicTextField(
-            value = viewModel.newText.value,
-            onValueChange = { text -> viewModel.updateText(text) },
+            value = newValue,
+            onValueChange = { value ->
+                newValue = value
+                println("TextChangePage ${newValue}")
+                viewModel.updateText(value.text)
+            },
             modifier = Modifier
-                .focusRequester(focusRequester),
+                .focusRequester(focusRequester) ,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = {
-                keyboardController?.hide()
-                navController.popBackStack()
-            },)
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    keyboardController?.hide()
+                    navController.popBackStack()
+                },
+            )
         )
+
+
     }
 }
 
