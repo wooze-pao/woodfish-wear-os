@@ -4,7 +4,7 @@
 
 | 设备类型 | 截图A | 截图B |
 |----------|------|--------|
-| 圆屏 | <img src="https://github.com/user-attachments/assets/40f14b32-07d4-4f21-9152-fa677fffbe9c" width="200"/>  | <img src="https://github.com/user-attachments/assets/0a36f0b3-7841-42a8-93b1-4cb3b924d710" width="200" /> | 
+| 圆屏 | <img src="https://github.com/wooze-pao/woodfish-wear-os/blob/main/appcapture/Screenshot_20250525_004617_woodfish.png" width="200"/>  | <img src="https://github.com/wooze-pao/woodfish-wear-os/blob/main/appcapture/Screenshot_20250525_004624_woodfish.png" width="200" /> | 
 
 ## 资源注明
 应用中的音效[音频文件](https://github.com/wooze-pao/woodfish-wear-os/tree/main/app/src/main/res/raw)来自[https://muyv.saop.cc/](https://muyv.saop.cc/)
