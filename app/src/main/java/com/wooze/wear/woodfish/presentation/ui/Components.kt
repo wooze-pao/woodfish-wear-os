@@ -75,7 +75,7 @@ fun SoundChange(soundEffect: String, onSoundChange: (String) -> Unit) {
                                 overflow = TextOverflow.Ellipsis, fontSize = 12.sp
                             )
                         }, colors = ChipDefaults.chipColors(
-                            if (label === soundEffect) {
+                            if (label == soundEffect) {
                                 MaterialTheme.colors.primary
                             } else {
                                 MaterialTheme.colors.surface
