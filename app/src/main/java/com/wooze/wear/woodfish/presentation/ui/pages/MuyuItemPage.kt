@@ -55,8 +55,8 @@ fun MuyuItemPage(
 ) {
     val countNumber by viewModel.countNumber
     val context = LocalContext.current
-    val animationTime = 100;
-    val textAnimationTime = 1000;
+    val animationTime = 100
+    val textAnimationTime = 1000
     val coroutineScope = rememberCoroutineScope()
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
 
