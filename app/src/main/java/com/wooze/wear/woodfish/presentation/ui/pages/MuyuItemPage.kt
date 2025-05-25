@@ -10,14 +10,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,15 +26,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Text
 import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
+import com.wooze.wear.woodfish.presentation.ui.TextAnimation
 import com.wooze.wear.woodfish.presentation.ui.vibrate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -60,7 +56,7 @@ fun MuyuItemPage(
     val countNumber by viewModel.countNumber
     val context = LocalContext.current
     val animationTime = 100;
-    val textAnimationTime = 500;
+    val textAnimationTime = 1000;
     val coroutineScope = rememberCoroutineScope()
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
 
@@ -134,7 +130,7 @@ fun MuyuItemPage(
 
             plusTextList.forEach { plusOne ->
                 key(plusOne.id) {
-                    TextAnimation(plusOne.offset, textAnimationTime)
+                    TextAnimation(plusOne.offset, textAnimationTime,text)
                 }
 
             }
@@ -145,33 +141,3 @@ fun MuyuItemPage(
     }
 }
 
-@Composable
-fun TextAnimation(offset: Offset, time: Int) {
-
-    var translationY by remember { mutableFloatStateOf(0f) }
-    var alpha by remember { mutableFloatStateOf(1f) }
-
-    LaunchedEffect(offset) {
-        translationY = -80f
-        alpha = 0f
-    }
-
-    val animationTranslationY by animateFloatAsState(
-        targetValue = translationY,
-        animationSpec = tween(time),
-        label = "translationY"
-    )
-
-    val animationAlpha by animateFloatAsState(
-        targetValue = alpha,
-        animationSpec = tween(time),
-        label = "alpha"
-    )
-
-    Text(
-        "+1", color = Color.Red, modifier = Modifier
-            .offset { IntOffset(offset.x.toInt(), offset.y.toInt()) }
-            .graphicsLayer(translationY = animationTranslationY, alpha = animationAlpha)
-    )
-
-}
