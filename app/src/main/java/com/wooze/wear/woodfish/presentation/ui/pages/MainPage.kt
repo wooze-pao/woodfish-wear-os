@@ -2,11 +2,13 @@ package com.wooze.wear.woodfish.presentation.ui.pages
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
+import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.ui.ColorChange
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 import com.wooze.wear.woodfish.presentation.ui.SoundChange
@@ -38,7 +40,7 @@ fun MainPage(
                 selectedSound,
                 onSoundChange = { sound -> viewModel.updateSoundEffect(sound) })
         }
-        item { Text("感谢下载本软件", color = MaterialTheme.colors.onSecondary) }
+        item { Text("感谢下载本软件\n版本" + stringResource(R.string.app_version), color = MaterialTheme.colors.onSecondary) }
     }
 
 }

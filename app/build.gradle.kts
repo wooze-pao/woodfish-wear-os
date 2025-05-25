@@ -12,8 +12,8 @@ android {
         applicationId = "com.wooze.wear.woodfish"
         minSdk = 30
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
     }
 
@@ -56,7 +56,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx) //add
     implementation(libs.lifecycle.viewmodel.ktx) //add
     implementation(libs.datastore.preferences) //add
-    implementation (libs.compose.navigation)
+    implementation(libs.compose.navigation) //add
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
