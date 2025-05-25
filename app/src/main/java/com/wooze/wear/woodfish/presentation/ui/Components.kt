@@ -228,5 +228,4 @@ fun TextAnimation(offset: Offset, time: Int,text: String) {
             .offset { IntOffset(offset.x.toInt(), offset.y.toInt()) }
             .graphicsLayer(translationY = animationTranslationY, alpha = animationAlpha)
     )
-
 }
