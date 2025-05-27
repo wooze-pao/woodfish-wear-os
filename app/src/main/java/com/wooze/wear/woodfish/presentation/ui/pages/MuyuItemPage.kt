@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -121,10 +122,11 @@ fun MuyuItemPage(
                 }) {
 
             Image(
-                painter = painterResource(id = R.drawable.muyu_removebg),
+                painter = painterResource(R.drawable.muyu_vector_main),
                 colorFilter = ColorFilter.tint(color),
                 contentDescription = "电子木鱼图片",
                 modifier = Modifier
+                    .size(120.dp)
                     .scale(scale)
             )
 

@@ -21,11 +21,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -62,7 +65,9 @@ fun SoundChange(soundEffect: String, onSoundChange: (String) -> Unit) {
             Text("音效")
             val scrollState = rememberScrollState()
             Row(
-                modifier = Modifier.horizontalScroll(scrollState),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(40.dp))
+                    .horizontalScroll(scrollState),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 listOf("清脆", "沉重", "坤叫", "Ciallo～(∠·ω< )⌒★").forEach { label ->
