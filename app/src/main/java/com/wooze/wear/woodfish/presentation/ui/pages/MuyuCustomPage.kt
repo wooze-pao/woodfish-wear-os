@@ -10,9 +10,9 @@ import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.TimeText
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
-import com.wooze.wear.woodfish.presentation.ui.ColorChange
-import com.wooze.wear.woodfish.presentation.ui.SoundChange
-import com.wooze.wear.woodfish.presentation.ui.TextChange
+import com.wooze.wear.woodfish.presentation.ui.components.customPage.ColorChange
+import com.wooze.wear.woodfish.presentation.ui.components.customPage.SoundChange
+import com.wooze.wear.woodfish.presentation.ui.components.customPage.TextChange
 
 @Composable
 fun MuyuCustomPage(

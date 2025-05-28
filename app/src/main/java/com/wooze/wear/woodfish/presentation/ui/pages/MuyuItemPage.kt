@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
@@ -34,8 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Text
 import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
-import com.wooze.wear.woodfish.presentation.ui.TextAnimation
-import com.wooze.wear.woodfish.presentation.ui.vibrate
+import com.wooze.wear.woodfish.presentation.ui.components.mainpage.TextAnimation
+import com.wooze.wear.woodfish.presentation.ui.components.mainpage.vibrate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -60,6 +61,7 @@ fun MuyuItemPage(
     val textAnimationTime = 1000
     val coroutineScope = rememberCoroutineScope()
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
+    val volume by remember { derivedStateOf { viewModel.getVolume() } }
 
     val soundPool = remember {
         SoundPool.Builder().setMaxStreams(10).setAudioAttributes(
@@ -109,7 +111,7 @@ fun MuyuItemPage(
                                     vibrate(context)
                                 }
                             }
-                            launch { soundPool.play(soundId, 1f, 1f, 0, 0, 1.0f) }
+                            launch { soundPool.play(soundId, volume, volume, 0, 0, 1.0f) }
                             viewModel.addCountNumber()
                             delay(timeMillis = animationTime.toLong())
                             toggled = false
@@ -132,7 +134,7 @@ fun MuyuItemPage(
 
             plusTextList.forEach { plusOne ->
                 key(plusOne.id) {
-                    TextAnimation(plusOne.offset, textAnimationTime,text)
+                    TextAnimation(plusOne.offset, textAnimationTime, text)
                 }
 
             }
