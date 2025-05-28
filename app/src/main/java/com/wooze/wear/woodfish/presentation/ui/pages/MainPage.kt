@@ -1,6 +1,6 @@
 package com.wooze.wear.woodfish.presentation.ui.pages
 
-import android.R.attr.versionName
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
