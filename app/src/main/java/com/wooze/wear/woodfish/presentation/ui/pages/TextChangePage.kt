@@ -56,6 +56,7 @@ fun TextChangePage(
         } else if (hasOpenedIme && hasStarted) {
             hasOpenedIme = false
             hasStarted = false
+            viewModel.updateText(newValue.text)
             navController.popBackStack()
         }
     }
@@ -77,6 +78,7 @@ fun TextChangePage(
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(
                 onDone = {
+                    viewModel.updateText(newValue.text)
                     focusRequester.freeFocus()
                     navController.popBackStack()
                 },

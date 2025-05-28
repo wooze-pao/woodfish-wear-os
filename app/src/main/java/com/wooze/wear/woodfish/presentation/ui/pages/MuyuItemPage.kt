@@ -62,7 +62,7 @@ fun MuyuItemPage(
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
 
     val soundPool = remember {
-        SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
+        SoundPool.Builder().setMaxStreams(10).setAudioAttributes(
             AudioAttributes.Builder().setUsage(
                 AudioAttributes.USAGE_MEDIA
             ).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
