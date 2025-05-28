@@ -1,5 +1,6 @@
 package com.wooze.wear.woodfish.presentation.ui.pages
 
+import android.R.attr.versionName
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,6 +15,7 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.Icon
+import androidx.wear.compose.material.InlineSlider
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
@@ -21,7 +23,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
-import com.wooze.wear.woodfish.presentation.ui.VibrateToggle
+import com.wooze.wear.woodfish.presentation.ui.components.mainpage.VibrateToggle
 
 @Composable
 fun MainPage(
@@ -62,6 +64,26 @@ fun MainPage(
                             )
                         },
                         secondaryLabel = { Text("自定义木鱼样式") }
+                    )
+                }
+                item {
+                    InlineSlider(
+                        value = viewModel.volumeLevel.value,
+                        onValueChange = { viewModel.updateVolumeLevel(it) },
+                        increaseIcon = {
+                            Icon(
+                                painterResource(R.drawable.ic_sound_max),
+                                "Increase"
+                            )
+                        },
+                        decreaseIcon = {
+                            Icon(
+                                painterResource(R.drawable.ic_sound_min),
+                                "Decrease"
+                            )
+                        },
+                        valueProgression = 0..4,
+                        segmented = true
                     )
                 }
                 item {

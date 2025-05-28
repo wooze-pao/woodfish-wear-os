@@ -21,6 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedColor = mutableStateOf(Color.Companion.White)
     val selectedColor: State<Color> = _selectedColor
 
+    private val _volumeLevel = mutableIntStateOf(4)
+    val volumeLevel: State<Int> = _volumeLevel
+
     private val _newText = mutableStateOf("功德")
     val newText: State<String> = _newText
 
@@ -35,11 +38,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            launch { _newText.value = dataStoreManager.readTextFlow.first() }
-            launch { _selectedSoundEffect.value = dataStoreManager.readSoundFlow.first() }
-            launch { _countNumber.intValue = dataStoreManager.readCountFlow.first() }
-            launch { _selectedColor.value = Color(dataStoreManager.readColorFlow.first()) }
-            launch { _isVibrateOpen.value = dataStoreManager.readIsVibrateOpenFlow.first() }
+            _newText.value = dataStoreManager.readTextFlow.first()
+            _selectedSoundEffect.value = dataStoreManager.readSoundFlow.first()
+            _countNumber.intValue = dataStoreManager.readCountFlow.first()
+            _selectedColor.value = Color(dataStoreManager.readColorFlow.first())
+            _isVibrateOpen.value = dataStoreManager.readIsVibrateOpenFlow.first()
+            _volumeLevel.intValue = dataStoreManager.readVolumeFLow.first()
         }
     }
 
@@ -56,6 +60,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val colorData = color.toArgb()
             dataStoreManager.saveColor(colorData)
         }
+    }
+
+    fun updateVolumeLevel(level: Int) {
+        _volumeLevel.intValue = level
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreManager.saveVolume(level)
+        }
+    }
+
+    fun getVolume(): Float {
+        val levels = listOf(0f, 0.25f, 0.5f, 0.75f, 1f)
+        return levels[volumeLevel.value]
     }
 
     fun updateSoundEffect(soundName: String) {

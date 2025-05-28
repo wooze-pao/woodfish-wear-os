@@ -19,6 +19,7 @@ val TEXT = stringPreferencesKey("text")
 val COLOR = intPreferencesKey("color")
 val SOUND = stringPreferencesKey("sound")
 val VIBRATE = booleanPreferencesKey("vibrate")
+val VOLUME = intPreferencesKey("volume")
 
 class DataStoreManager(private val context: Context) {
 
@@ -41,6 +42,10 @@ class DataStoreManager(private val context: Context) {
         writeData(COUNT, data)
     }
 
+    suspend fun saveVolume(data: Int) {
+        writeData(VOLUME,data)
+    }
+
     suspend fun saveColor(data: Int) {
         writeData(COLOR, data)
     }
@@ -57,7 +62,7 @@ class DataStoreManager(private val context: Context) {
     val readSoundFlow: Flow<String> = readData<String>(SOUND, "清脆")
     val readColorFlow: Flow<Int> = readData<Int>(COLOR, Color.White.toArgb())
     val readCountFlow: Flow<Int> = readData<Int>(COUNT, 0)
+    val readVolumeFLow : Flow<Int> = readData<Int>(VOLUME,4)
     val readIsVibrateOpenFlow : Flow<Boolean> = readData<Boolean>(VIBRATE,true)
-
 
 }
