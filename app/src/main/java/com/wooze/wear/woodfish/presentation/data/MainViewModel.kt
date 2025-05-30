@@ -54,6 +54,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun clearCountNumber() {
+        _countNumber.intValue = 0
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreManager.saveCount(_countNumber.intValue)
+        }
+    }
+
     fun updateColor(color: Color) {
         _selectedColor.value = color
         viewModelScope.launch(Dispatchers.IO) {

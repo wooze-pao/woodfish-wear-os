@@ -1,10 +1,12 @@
 package com.wooze.wear.woodfish.presentation.ui.pages
 
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -30,11 +32,18 @@ fun MainPage(
     viewModel: MainViewModel,
     listState: ScalingLazyListState,
     navController: NavController,
+    context: Context
 ) {
     val newText by viewModel.newText
     val selectedColor by viewModel.selectedColor
     val selectedSound by viewModel.selectedSoundEffect
     val isVibrateOpen by viewModel.isVibrateOpen
+    val count by viewModel.countNumber
+    val isEnabled : Boolean = count >= 1
+
+    LaunchedEffect(Unit) {//启动时
+        listState.scrollToItem(0)   //滑动到列表第1（0）个
+    }
 
     Scaffold(
         timeText = { TimeText() },
@@ -46,7 +55,8 @@ fun MainPage(
                         newText,
                         selectedColor,
                         selectedSound,
-                        isVibrateOpen
+                        isVibrateOpen,
+                        context
                     )
                 }
                 item {
@@ -90,6 +100,15 @@ fun MainPage(
                     VibrateToggle(
                         isVibrateOpen,
                         onCheckedChange = { boolean -> viewModel.updateIsVibrateOpen(boolean) })
+                }
+                item {
+                    Chip(
+                        label = { Text("重置计数") },
+                        onClick = { viewModel.clearCountNumber() },
+                        icon = { Icon(painterResource(R.drawable.ic_chip_refresh), "重置计数") },
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = isEnabled,
+                    )
                 }
                 item {
                     Text(
