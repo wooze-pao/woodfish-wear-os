@@ -43,7 +43,7 @@ android {
 
 dependencies {
 
-    implementation(libs.play.services.wearable)
+//    implementation(libs.play.services.wearable) 用不到谷歌服务
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.graphics)
