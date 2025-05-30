@@ -1,8 +1,3 @@
-/* While this template provides a good starting point for using Wear Compose, you can always
- * take a look at https://github.com/android/wear-os-samples/tree/main/ComposeStarter to find the
- * most up to date changes to the libraries and their usages.
- */
-
 package com.wooze.wear.woodfish.presentation.ui
 
 import android.R
@@ -12,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
@@ -31,10 +27,7 @@ class MainActivity : ComponentActivity() {
         val mainViewModel: MainViewModel by viewModels()
         setTheme(R.style.Theme_DeviceDefault)
         setContent {
-            WoodfishTheme {
                 WearApp(mainViewModel)
-            }
-
         }
     }
 }
@@ -42,6 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp(viewModel: MainViewModel) {
     val navController = rememberSwipeDismissableNavController()
+    val context = LocalContext.current
 
     SwipeDismissableNavHost(
         navController = navController,
@@ -49,7 +43,7 @@ fun WearApp(viewModel: MainViewModel) {
     ) {
         composable("mainPage") {
             val listState = rememberScalingLazyListState()
-            MainPage(viewModel, listState, navController)
+            MainPage(viewModel, listState, navController,context)
         }
 
         composable("textChangePage") { TextChangePage(viewModel, navController) }
