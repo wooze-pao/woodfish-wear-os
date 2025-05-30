@@ -41,7 +41,7 @@ fun TextAnimation(offset: Offset, time: Int,text: String) {
 
     Text(
         "${text}+1", color = Color.Red, modifier = Modifier
-            .offset { IntOffset(offset.x.toInt(), offset.y.toInt()) }
+            .offset { IntOffset(offset.x.toInt(), offset.y.toInt() - 100) }
             .graphicsLayer(translationY = animationTranslationY, alpha = animationAlpha)
     )
 }
