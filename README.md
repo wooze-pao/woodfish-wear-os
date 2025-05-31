@@ -2,9 +2,9 @@
 一个用 jetpack compose 开发的电子木鱼wearos手表应用
 ## 应用截图
 
-| 设备类型 | 截图A | 截图B |
-|----------|------|--------|
-| 圆屏 | <img src="https://github.com/wooze-pao/woodfish-wear-os/blob/main/appcapture/Screenshot_20250525_004617_woodfish.png" width="200"/>  | <img src="https://github.com/wooze-pao/woodfish-wear-os/blob/main/appcapture/Screenshot_20250525_004624_woodfish.png" width="200" /> | 
+| 设备类型 | 截图A | 截图B | 截图C |
+|----------|------|--------|------|
+| 圆屏 | <img src="appcapture/Screenshot_A.png" width="200"/>  | <img src="appcapture/Screenshot_B.png" width="200" /> | <img src="appcapture/Screenshot_C.png" width="200" /> |
 
 ## 资源注明
 应用中的音效[音频文件](https://github.com/wooze-pao/woodfish-wear-os/tree/main/app/src/main/res/raw)来自[https://muyv.saop.cc/](https://muyv.saop.cc/)
