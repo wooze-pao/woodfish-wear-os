@@ -14,7 +14,7 @@ android {
         targetSdk = 35
         versionCode = 5
         versionName = "1.3.1"
-
+        setProperty("archivesBaseName", "woodfish-v${versionName}(${versionCode})") // exp: woodfish-v1.1.1(5)-release
     }
 
 
