@@ -7,6 +7,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -19,7 +20,7 @@ val TEXT = stringPreferencesKey("text")
 val COLOR = intPreferencesKey("color")
 val SOUND = stringPreferencesKey("sound")
 val VIBRATE = booleanPreferencesKey("vibrate")
-val VOLUME = intPreferencesKey("volume")
+val VOLUME = floatPreferencesKey("volume")
 
 class DataStoreManager(private val context: Context) {
 
@@ -42,7 +43,7 @@ class DataStoreManager(private val context: Context) {
         writeData(COUNT, data)
     }
 
-    suspend fun saveVolume(data: Int) {
+    suspend fun saveVolume(data: Float) {
         writeData(VOLUME,data)
     }
 
@@ -62,7 +63,7 @@ class DataStoreManager(private val context: Context) {
     val readSoundFlow: Flow<String> = readData<String>(SOUND, "清脆")
     val readColorFlow: Flow<Int> = readData<Int>(COLOR, Color.White.toArgb())
     val readCountFlow: Flow<Int> = readData<Int>(COUNT, 0)
-    val readVolumeFLow : Flow<Int> = readData<Int>(VOLUME,4)
+    val readVolumeFLow : Flow<Float> = readData<Float>(VOLUME,1f)
     val readIsVibrateOpenFlow : Flow<Boolean> = readData<Boolean>(VIBRATE,true)
 
 }

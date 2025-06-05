@@ -37,8 +37,7 @@ fun ColorChange(colorV: Color, onColorChange: (Color) -> Unit) {
             onClick = { expanded = !expanded },
             label = { Text("颜色") },
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 50.dp),
+                .fillMaxWidth(),
             icon = {
                 Box(
                     modifier = Modifier

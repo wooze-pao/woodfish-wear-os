@@ -5,18 +5,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 import com.wooze.wear.woodfish.presentation.ui.pages.MainPage
-import com.wooze.wear.woodfish.presentation.ui.pages.TextChangePage
 import com.wooze.wear.woodfish.presentation.ui.pages.MuyuCustomPage
-import kotlin.getValue
+import com.wooze.wear.woodfish.presentation.ui.pages.TextChangePage
 
 
 class MainActivity : ComponentActivity() {

@@ -39,7 +39,7 @@ fun MainPage(
     val selectedSound by viewModel.selectedSoundEffect
     val isVibrateOpen by viewModel.isVibrateOpen
     val count by viewModel.countNumber
-    val isEnabled : Boolean = count >= 1
+    val isEnabled: Boolean = count >= 1
 
     LaunchedEffect(Unit) {//启动时
         listState.scrollToItem(0)   //滑动到列表第1（0）个
@@ -92,8 +92,9 @@ fun MainPage(
                                 "Decrease"
                             )
                         },
-                        valueProgression = 0..4,
-                        segmented = true
+                        steps = 3,
+                        segmented = true,
+                        valueRange = 0f..1f
                     )
                 }
                 item {

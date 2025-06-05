@@ -9,12 +9,12 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
@@ -40,7 +40,6 @@ import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberSound
 import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberVibrator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.nio.file.WatchEvent
 import java.util.UUID
 
 
@@ -63,7 +62,7 @@ fun MuyuItemPage(
     val textAnimationTime = 1000
     val coroutineScope = rememberCoroutineScope()
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
-    val volume by remember { derivedStateOf { viewModel.getVolume() } }
+    val volume by viewModel.volumeLevel
     val vibrator = rememberVibrator(context)
     val soundPool = rememberSoundPool()
     val soundId = remember(context, soundPool, sound) {
@@ -83,11 +82,11 @@ fun MuyuItemPage(
             .fillMaxSize()
             .padding(top = 30.dp)
     ) {
-        Text(
-            text = "${text}+${countNumber}",
-            style = MaterialTheme.typography.title3,
-            modifier = Modifier.padding(5.dp)
-        )
+        Row(modifier = Modifier.padding(5.dp), verticalAlignment = Alignment.Bottom) {
+            Text("${text}+", style = MaterialTheme.typography.title3)
+            Text(text = "$countNumber", style = MaterialTheme.typography.title3)
+        }
+
         var toggled by remember {
             mutableStateOf(false)
         }
@@ -102,25 +101,29 @@ fun MuyuItemPage(
                 .pointerInput(Unit) {
                     detectTapGestures {
                         val newPlusText = PlusOneText(offset = it)
+                        if (plusTextList.size >= 5) {
+                            plusTextList.removeAt(0)
+                        }
                         plusTextList.add(newPlusText)
                         toggled = true
                         coroutineScope.launch {
-                            launch {
-                                if (isVibrateOpen) {
-                                    val effect =
-                                        VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
-                                    vibrator.vibrate(effect)
-                                }
+                            if (isVibrateOpen) {
+                                val effect =
+                                    VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
+                                vibrator.vibrate(effect)
                             }
-                            launch { soundPool.play(soundId, volume, volume, 0, 0, 1.0f) }
+
+                            soundPool.play(soundId, volume, volume, 0, 0, 1.0f)
                             viewModel.addCountNumber()
                             delay(timeMillis = animationTime.toLong())
                             toggled = false
-                        }
-                        coroutineScope.launch {
+
                             delay(textAnimationTime.toLong())
                             plusTextList.remove(newPlusText)
+
                         }
+
+
                     }
                 }) {
 

@@ -2,6 +2,7 @@ package com.wooze.wear.woodfish.presentation.data
 
 import android.app.Application
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
@@ -17,12 +18,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val dataStoreManager = DataStoreManager(application.applicationContext)
 
-
     private val _selectedColor = mutableStateOf(Color.Companion.White)
     val selectedColor: State<Color> = _selectedColor
 
-    private val _volumeLevel = mutableIntStateOf(4)
-    val volumeLevel: State<Int> = _volumeLevel
+    private val _volumeLevel = mutableFloatStateOf(1f)
+    val volumeLevel: State<Float> = _volumeLevel
 
     private val _newText = mutableStateOf("功德")
     val newText: State<String> = _newText
@@ -43,7 +43,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _countNumber.intValue = dataStoreManager.readCountFlow.first()
             _selectedColor.value = Color(dataStoreManager.readColorFlow.first())
             _isVibrateOpen.value = dataStoreManager.readIsVibrateOpenFlow.first()
-            _volumeLevel.intValue = dataStoreManager.readVolumeFLow.first()
+            _volumeLevel.floatValue = dataStoreManager.readVolumeFLow.first()
         }
     }
 
@@ -69,16 +69,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun updateVolumeLevel(level: Int) {
-        _volumeLevel.intValue = level
+    fun updateVolumeLevel(level: Float) {
+        _volumeLevel.floatValue = level
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreManager.saveVolume(level)
         }
-    }
-
-    fun getVolume(): Float {
-        val levels = listOf(0f, 0.25f, 0.5f, 0.75f, 1f)
-        return levels[volumeLevel.value]
     }
 
     fun updateSoundEffect(soundName: String) {
