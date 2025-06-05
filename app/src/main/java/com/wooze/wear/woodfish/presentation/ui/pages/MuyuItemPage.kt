@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
@@ -39,6 +40,7 @@ import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberSound
 import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberVibrator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.nio.file.WatchEvent
 import java.util.UUID
 
 
@@ -81,7 +83,11 @@ fun MuyuItemPage(
             .fillMaxSize()
             .padding(top = 30.dp)
     ) {
-        Text(text = "${text}+${countNumber}")
+        Text(
+            text = "${text}+${countNumber}",
+            style = MaterialTheme.typography.title3,
+            modifier = Modifier.padding(5.dp)
+        )
         var toggled by remember {
             mutableStateOf(false)
         }
@@ -101,7 +107,8 @@ fun MuyuItemPage(
                         coroutineScope.launch {
                             launch {
                                 if (isVibrateOpen) {
-                                    val effect = VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
+                                    val effect =
+                                        VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
                                     vibrator.vibrate(effect)
                                 }
                             }

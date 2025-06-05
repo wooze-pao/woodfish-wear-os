@@ -15,7 +15,6 @@ import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 import com.wooze.wear.woodfish.presentation.ui.pages.MainPage
 import com.wooze.wear.woodfish.presentation.ui.pages.TextChangePage
-import com.wooze.wear.woodfish.presentation.theme.WoodfishTheme
 import com.wooze.wear.woodfish.presentation.ui.pages.MuyuCustomPage
 import kotlin.getValue
 

@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 @Composable
 fun rememberSoundPool() : SoundPool {
     return remember {
-        SoundPool.Builder().setMaxStreams(10).setAudioAttributes(
+        SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
             AudioAttributes.Builder().setUsage(
                 AudioAttributes.USAGE_MEDIA
             ).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
