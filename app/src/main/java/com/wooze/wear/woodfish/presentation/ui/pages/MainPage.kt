@@ -1,7 +1,6 @@
 package com.wooze.wear.woodfish.presentation.ui.pages
 
 
-import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
-import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.InlineSlider
@@ -30,16 +29,14 @@ import com.wooze.wear.woodfish.presentation.ui.components.mainpage.VibrateToggle
 @Composable
 fun MainPage(
     viewModel: MainViewModel,
-    listState: ScalingLazyListState,
-    navController: NavController,
-    context: Context
+    navController: NavController
 ) {
     val newText by viewModel.newText
     val selectedColor by viewModel.selectedColor
-    val selectedSound by viewModel.selectedSoundEffect
     val isVibrateOpen by viewModel.isVibrateOpen
     val count by viewModel.countNumber
     val isEnabled: Boolean = count >= 1
+    val listState = rememberScalingLazyListState()
 
     LaunchedEffect(Unit) {//启动时
         listState.scrollToItem(0)   //滑动到列表第1（0）个
@@ -54,9 +51,7 @@ fun MainPage(
                         viewModel,
                         newText,
                         selectedColor,
-                        selectedSound,
-                        isVibrateOpen,
-                        context
+                        isVibrateOpen
                     )
                 }
                 item {
@@ -119,7 +114,12 @@ fun MainPage(
                 }
             }
         },
-        positionIndicator = { PositionIndicator(scalingLazyListState = listState) }
+        positionIndicator = {
+            PositionIndicator(
+                scalingLazyListState = listState,
+                modifier = Modifier
+            )
+        }
     )
 
 

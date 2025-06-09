@@ -13,11 +13,17 @@ import com.wooze.wear.woodfish.R
 @Composable
 fun VibrateToggle(checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
 
-    ToggleChip(checked = checked,
+    ToggleChip(
+        checked = checked,
         label = { Text("震动开关") },
-        toggleControl = { Switch(checked = checked) },
+        toggleControl = { Switch(checked = checked, enabled = true) },
         onCheckedChange = onCheckedChange,
         modifier = Modifier.fillMaxWidth(),
-        appIcon = {Icon(painter = painterResource(R.drawable.ic_chip_vibration),contentDescription = null)}
+        appIcon = {
+            Icon(
+                painter = painterResource(R.drawable.ic_chip_vibration),
+                contentDescription = null
+            )
+        }
     )
 }

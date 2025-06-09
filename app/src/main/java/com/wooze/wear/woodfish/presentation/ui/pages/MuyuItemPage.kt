@@ -1,7 +1,5 @@
 package com.wooze.wear.woodfish.presentation.ui.pages
 
-import android.content.Context
-import android.os.VibrationEffect
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -14,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
@@ -36,8 +33,6 @@ import androidx.wear.compose.material.Text
 import com.wooze.wear.woodfish.R
 import com.wooze.wear.woodfish.presentation.data.MainViewModel
 import com.wooze.wear.woodfish.presentation.ui.components.mainpage.TextAnimation
-import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberSoundPool
-import com.wooze.wear.woodfish.presentation.ui.components.mainpage.rememberVibrator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -53,27 +48,13 @@ fun MuyuItemPage(
     viewModel: MainViewModel,
     text: String,
     color: Color,
-    sound: String,
     isVibrateOpen: Boolean,
-    context: Context
 ) {
     val countNumber by viewModel.countNumber
     val animationTime = 100
     val textAnimationTime = 1000
     val coroutineScope = rememberCoroutineScope()
     val plusTextList = remember { mutableStateListOf<PlusOneText>() }
-    val volume by viewModel.volumeLevel
-    val vibrator = rememberVibrator(context)
-    val soundPool = rememberSoundPool()
-    val soundId = remember(context, soundPool, sound) {
-        soundPool.load(context, viewModel.soundEffectFileId(), 1)
-    }
-
-    DisposableEffect(soundPool) {
-        onDispose {
-            soundPool.release()
-        }
-    }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -108,12 +89,9 @@ fun MuyuItemPage(
                         toggled = true
                         coroutineScope.launch {
                             if (isVibrateOpen) {
-                                val effect =
-                                    VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
-                                vibrator.vibrate(effect)
+                                viewModel.vibrate()
                             }
-
-                            soundPool.play(soundId, volume, volume, 0, 0, 1.0f)
+                            viewModel.playSound()
                             viewModel.addCountNumber()
                             delay(timeMillis = animationTime.toLong())
                             toggled = false

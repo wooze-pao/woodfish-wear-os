@@ -1,6 +1,9 @@
 package com.wooze.wear.woodfish.presentation.data
 
 import android.app.Application
+import android.media.SoundPool
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -8,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.wooze.wear.woodfish.R
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +40,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _isVibrateOpen = mutableStateOf(true)
     val isVibrateOpen: State<Boolean> = _isVibrateOpen
 
+    private val soundPool: SoundPool = ReUseSoundPool()
+    private val vibrator: Vibrator = ReUseVibrator(application.applicationContext)
+    private var soundId: Int = 0
+
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             _newText.value = dataStoreManager.readTextFlow.first()
@@ -44,7 +53,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _selectedColor.value = Color(dataStoreManager.readColorFlow.first())
             _isVibrateOpen.value = dataStoreManager.readIsVibrateOpenFlow.first()
             _volumeLevel.floatValue = dataStoreManager.readVolumeFLow.first()
+            soundId = soundPool.load(application.applicationContext, soundEffectFileId(), 1)
         }
+    }
+
+
+    fun playSound() {
+        soundPool.play(soundId, volumeLevel.value, volumeLevel.value, 0, 0, 1.0f)
+    }
+
+    fun vibrate() {
+        val effect =
+            VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK)
+        vibrator.vibrate(effect)
     }
 
     fun addCountNumber() {
@@ -76,8 +97,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun reLoadSoundId() {
+        soundId = soundPool.load(application.applicationContext, soundEffectFileId(), 1)
+    }
+
     fun updateSoundEffect(soundName: String) {
         _selectedSoundEffect.value = soundName
+        reLoadSoundId()
         viewModelScope.launch(Dispatchers.IO) {
             dataStoreManager.saveSound(soundName)
         }
@@ -105,5 +131,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             "Ciallo～(∠·ω< )⌒★" -> R.raw.muyu_sound_ciallo
             else -> R.raw.muyu_sound_normal
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        soundPool.release()
     }
 }

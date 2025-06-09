@@ -11,13 +11,14 @@ import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import com.wooze.wear.woodfish.R
+import com.wooze.wear.woodfish.presentation.ui.NavRoutes
 
 @Composable
 fun TextChange(
     navController: NavController, text: String
 ) {
     Chip(
-        onClick = { navController.navigate("textChangePage") },
+        onClick = { navController.navigate(NavRoutes.TEXT_CHANGE_PAGE) },
         label = { Text("更改文字") },
         modifier = Modifier.fillMaxWidth(),
         icon = {

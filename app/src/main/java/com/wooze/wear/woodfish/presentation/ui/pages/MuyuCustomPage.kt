@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
-import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
@@ -20,13 +20,13 @@ import com.wooze.wear.woodfish.presentation.ui.components.customPage.TextChange
 
 @Composable
 fun MuyuCustomPage(
-    listState: ScalingLazyListState,
     navController: NavController,
     viewModel: MainViewModel,
 ) {
     val newText by viewModel.newText
     val selectedColor by viewModel.selectedColor
     val selectedSound by viewModel.selectedSoundEffect
+    val listState = rememberScalingLazyListState()
 
 
     Scaffold(
