@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.wear.compose.material.Text
 
 @Composable
-fun TextAnimation(offset: Offset, time: Int,text: String) {
+fun TextAnimation(offset: Offset, time: Int, text: String) {
 
     var translationY by remember { mutableFloatStateOf(0f) }
     var alpha by remember { mutableFloatStateOf(1f) }

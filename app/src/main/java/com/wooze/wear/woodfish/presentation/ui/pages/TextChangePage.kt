@@ -74,7 +74,7 @@ fun TextChangePage(
                 newValue = value
             },
             modifier = Modifier
-                .focusRequester(focusRequester) ,
+                .focusRequester(focusRequester),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(
                 onDone = {

@@ -35,7 +35,11 @@ fun MuyuCustomPage(
             ScalingLazyColumn(state = listState) {
 
                 item {
-                    Text("自定义", style = MaterialTheme.typography.body1, modifier = Modifier.padding(10.dp))
+                    Text(
+                        "自定义",
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(10.dp)
+                    )
                 }
 
                 item {

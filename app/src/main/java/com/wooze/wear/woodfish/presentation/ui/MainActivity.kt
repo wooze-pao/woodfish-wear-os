@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         val mainViewModel: MainViewModel by viewModels()
         setTheme(R.style.Theme_DeviceDefault)
         setContent {
-                WearApp(mainViewModel)
+            WearApp(mainViewModel)
         }
     }
 }

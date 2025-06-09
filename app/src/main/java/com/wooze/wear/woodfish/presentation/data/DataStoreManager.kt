@@ -44,7 +44,7 @@ class DataStoreManager(private val context: Context) {
     }
 
     suspend fun saveVolume(data: Float) {
-        writeData(VOLUME,data)
+        writeData(VOLUME, data)
     }
 
     suspend fun saveColor(data: Int) {
@@ -56,14 +56,14 @@ class DataStoreManager(private val context: Context) {
     }
 
     suspend fun saveVibrate(boolean: Boolean) {
-        writeData(VIBRATE,boolean)
+        writeData(VIBRATE, boolean)
     }
 
     val readTextFlow: Flow<String> = readData<String>(TEXT, "功德")
     val readSoundFlow: Flow<String> = readData<String>(SOUND, "清脆")
     val readColorFlow: Flow<Int> = readData<Int>(COLOR, Color.White.toArgb())
     val readCountFlow: Flow<Int> = readData<Int>(COUNT, 0)
-    val readVolumeFLow : Flow<Float> = readData<Float>(VOLUME,1f)
-    val readIsVibrateOpenFlow : Flow<Boolean> = readData<Boolean>(VIBRATE,true)
+    val readVolumeFLow: Flow<Float> = readData<Float>(VOLUME, 1f)
+    val readIsVibrateOpenFlow: Flow<Boolean> = readData<Boolean>(VIBRATE, true)
 
 }
